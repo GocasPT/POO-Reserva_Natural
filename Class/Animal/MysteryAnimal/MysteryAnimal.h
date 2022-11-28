@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_MYSTERYANIMAL_H
-#define TP_MYSTERYANIMAL_H
+#ifndef MYSTERYANIMAL_H
+#define MYSTERYANIMAL_H
 
+#include "Animal.h"
 
-class MysteryAnimal {
-
+class MysteryAnimal : private Animal {
+public:
+    MysteryAnimal(int id, int x, int y);
 };
 
 
-#endif //TP_MYSTERYANIMAL_H
+#endif //MYSTERYANIMAL_H

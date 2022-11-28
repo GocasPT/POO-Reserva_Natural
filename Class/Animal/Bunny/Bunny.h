@@ -1,22 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 12/11/2022.
 //
 
-#ifndef TP_BUNNY_H
-#define TP_BUNNY_H
+#ifndef BUNNY_H
+#define BUNNY_H
 
-#include <iostream>
-#include <string>
+#include "Animal.h"
 
-class Bunny {
+class Bunny : private Animal {
 public:
-    Bunny();
-
-    ~Bunny();
-
-private:
-    int vida;
+    Bunny(int id, int x, int y);
 };
 
 
-#endif //TP_BUNNY_H
+#endif //BUNNY_H

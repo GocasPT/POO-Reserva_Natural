@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_MYSTERYFOOD_H
-#define TP_MYSTERYFOOD_H
+#ifndef MYSTERYFOOD_H
+#define MYSTERYFOOD_H
 
+#include "../Food.h"
 
-class MysteryFood {
-
+class MysteryFood : private Food {
+public:
+    MysteryFood();
 };
 
 
-#endif //TP_MYSTERYFOOD_H
+#endif //MYSTERYFOOD_H

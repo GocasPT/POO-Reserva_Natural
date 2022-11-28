@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_SHEEP_H
-#define TP_SHEEP_H
+#ifndef SHEEP_H
+#define SHEEP_H
 
+#include "Animal.h"
 
-class Sheep {
-
+class Sheep : private Animal {
+public:
+    Sheep(int id, int x, int y);
 };
 
 
-#endif //TP_SHEEP_H
+#endif //SHEEP_H

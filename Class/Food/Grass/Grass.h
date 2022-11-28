@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_GRASS_H
-#define TP_GRASS_H
+#ifndef GRASS_H
+#define GRASS_H
 
+#include "../Food.h"
 
-class Grass {
-
+class Grass : private Food {
+public:
+    Grass();
 };
 
 
-#endif //TP_GRASS_H
+#endif //GRASS_H

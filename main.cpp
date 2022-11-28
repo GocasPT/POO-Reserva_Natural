@@ -1,6 +1,9 @@
-#include <iostream>
+#include "Simulator.h"
+#include "UI.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    srand(time(nullptr));
+    //Menu();
+    Simulator simulator;
     return 0;
 }

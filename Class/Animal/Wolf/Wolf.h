@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_WOLF_H
-#define TP_WOLF_H
+#ifndef WOLF_H
+#define WOLF_H
 
+#include "Animal.h"
 
-class Wolf {
-
+class Wolf : private Animal {
+public:
+    Wolf(int id, int x, int y);
 };
 
 
-#endif //TP_WOLF_H
+#endif //WOLF_H

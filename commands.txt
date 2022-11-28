@@ -1,0 +1,16 @@
+animal 1
+kill 1 2
+killid 1
+food 1
+feed 1 2 3 4
+feedid 1
+nofood 1
+empty 1
+see 1
+info 1
+n
+anim
+visanim
+store 1
+restore 1
+slide 1 2

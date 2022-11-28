@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_CARROT_H
-#define TP_CARROT_H
+#ifndef CARROT_H
+#define CARROT_H
 
+#include "../Food.h"
 
-class Carrot {
-
+class Carrot : private Food {
+public:
+    Carrot();
 };
 
 
-#endif //TP_CARROT_H
+#endif //CARROT_H

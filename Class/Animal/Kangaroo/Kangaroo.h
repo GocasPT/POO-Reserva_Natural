@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_KANGAROO_H
-#define TP_KANGAROO_H
+#ifndef KANGAROO_H
+#define KANGAROO_H
 
+#include "Animal.h"
 
-class Kangaroo {
-
+class Kangaroo : private Animal {
+public:
+    Kangaroo(int id, int x, int y);
 };
 
 
-#endif //TP_KANGAROO_H
+#endif //KANGAROO_H

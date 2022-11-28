@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/TP
+# Install script for directory: C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/TP")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/POO_Reserva_Natural")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/TP/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

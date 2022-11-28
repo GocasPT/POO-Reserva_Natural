@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_BODY_H
-#define TP_BODY_H
+#ifndef BODY_H
+#define BODY_H
 
+#include "../Food.h"
 
-class Body {
-
+class Body : private Food {
+public:
+    Body();
 };
 
 
-#endif //TP_BODY_H
+#endif //BODY_H

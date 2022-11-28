@@ -1,14 +1,16 @@
 //
-// Created by Guilherme Camacho on 04/11/2022.
+// Created by Guilherme Camacho on 21/11/2022.
 //
 
-#ifndef TP_STEAK_H
-#define TP_STEAK_H
+#ifndef STEAK_H
+#define STEAK_H
 
+#include "../Food.h"
 
-class Steak {
-
+class Steak : private Food {
+public:
+    Steak();
 };
 
 
-#endif //TP_STEAK_H
+#endif //STEAK_H

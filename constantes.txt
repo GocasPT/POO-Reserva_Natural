@@ -1,0 +1,7 @@
+---Coleho---
+SCoelho 20
+VCoelho 30
+
+---Ovelha---
+SOvelha
+VOvelha
