@@ -20,7 +20,34 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a56320a-e90e-4ce8-a6b6-203164c45a75" name="Changes" comment="" />
+    <list default="true" id="8a56320a-e90e-4ce8-a6b6-203164c45a75" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class/Reserve/Reserve.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Class/Reserve/Reserve.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class/Reserve/Reserve.h" beforeDir="false" afterPath="$PROJECT_DIR$/Class/Reserve/Reserve.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class/Simulator/Simulator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Class/Simulator/Simulator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class/Simulator/Simulator.h" beforeDir="false" afterPath="$PROJECT_DIR$/Class/Simulator/Simulator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class/UI/UI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Class/UI/UI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class/UI/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/Class/UI/UI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-983436751c01ae4bfc47.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-df8dc1789aed2bc25659.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-a92bdd8339da92c92479.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-cfbdbd0f3594b90e035c.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-0fc4edaf1296bbfaffe8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-5a45fee017d9b83b34f8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-11-10T10-24-39-0713.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-11-27T18-04-22-0693.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-POO-Reserva_Natural-Debug-5a4bfd7ef04e958cef5d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TP-Debug-f3291dc2f29b57cce5f8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +57,9 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -46,21 +76,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;discord-application&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "structure.view.defaults.are.configured": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="CMake Application.POO">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Debug" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="POO-Reserva_Natural" TARGET_NAME="POO-Reserva_Natural" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="POO-Reserva_Natural" RUN_TARGET_NAME="POO-Reserva_Natural">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -93,10 +129,45 @@
       <workItem from="1669569221366" duration="9698000" />
       <workItem from="1669598185030" duration="6238000" />
       <workItem from="1669607235199" duration="8596000" />
+      <workItem from="1669625122767" duration="145000" />
+      <workItem from="1669648242426" duration="372000" />
+      <workItem from="1669648668165" duration="104000" />
+      <workItem from="1669651092469" duration="131000" />
+      <workItem from="1669996811487" duration="2182000" />
+      <workItem from="1670218224746" duration="722000" />
+      <workItem from="1670366064127" duration="86000" />
+      <workItem from="1670442089659" duration="7000" />
+      <workItem from="1670442175763" duration="19000" />
+      <workItem from="1670442262417" duration="29000" />
+      <workItem from="1671455161047" duration="6733000" />
+      <workItem from="1671462129605" duration="22000" />
+      <workItem from="1671462501417" duration="151000" />
+      <workItem from="1671463613104" duration="2657000" />
+      <workItem from="1671521720551" duration="3671000" />
+      <workItem from="1671528643604" duration="1569000" />
+      <workItem from="1671530299538" duration="11838000" />
+      <workItem from="1671604178019" duration="1706000" />
+      <workItem from="1671760636406" duration="1415000" />
+      <workItem from="1672910134731" duration="558000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

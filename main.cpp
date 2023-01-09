@@ -2,8 +2,9 @@
 #include "UI.h"
 
 int main() {
-    srand(time(nullptr));
-    //Menu();
-    Simulator simulator;
+    int NL, NC;
+    //srand(time(nullptr));
+    Menu(NL, NC);
+    Simulator simulator(NL, NC);
     return 0;
 }

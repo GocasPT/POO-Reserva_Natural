@@ -5,6 +5,6 @@
 #ifndef TP_UI_H
 #define TP_UI_H
 
-void Menu();
+void Menu(int &x, int &y);
 
 #endif //TP_UI_H

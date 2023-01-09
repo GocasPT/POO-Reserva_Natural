@@ -13,9 +13,9 @@
 class Reserve {
     int m_NL;
     int m_NC;
-    std::vector<std::vector<char>> m_grid;
-    std::vector<Animal> m_animals;
-    std::vector<Food> m_foods;
+    void*** m_grid;
+    Animal* m_animals_list;
+    Food* m_foods_list;
 
 public:
     Reserve(int NL, int NC);
@@ -24,10 +24,13 @@ public:
 
     int getRow() const;
     int getColum() const;
-    std::vector<std::vector<char>> getGrid() const;
+    void*** getGrid() const;
 
     void addAnimal(int id, int x, int y);
     void addFood(int id, int x, int y);
+
+    void removeAnimal(int id);
+    void removeFood(int id);
 
     ~Reserve();
 };

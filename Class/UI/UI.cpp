@@ -3,17 +3,17 @@
 //
 #include <iostream>
 #include <sstream>
-#include "curses.h"
 #include "Terminal.h"
 #include "UI.h"
 
 using namespace std;
 using namespace term;
 
-void Menu() {
+void Menu(int &x, int &y) {
     Terminal &t = Terminal::instance();
     Window menu = Window(25, 5, 65, 15, false);
     ostringstream os;
+    string x_str, y_str;
 
     os << "   _____  _                    _             _              " << endl;
     os << "  / ____|(_)                  | |           | |             " << endl;
@@ -23,14 +23,12 @@ void Menu() {
     os << R"( |_____/ |_||_| |_| |_| \__,_||_| \__,_| \__,_| \___/ |_|   )" << endl;
     os << "                                                            " << endl << endl;
 
-    int option;
-    /*string input;*/
     os << "\n\t1 - Comecar o simulador\n";
     os << "\t2 - Sair do simulador\n\nEscolha: ";
-    //menu << move_to(0, 0);
-    //menu << os.str();
+
+    string input;
+    int option;
     do {
-        string input;
         menu << os.str();
         menu >> input;
         stringstream(input) >> option;
@@ -41,5 +39,22 @@ void Menu() {
             exit(0);
         }
     } while (true);
+
+    menu.clear();
+    menu << move_to(0,0);
+
+    do {
+        menu << "Numero de linhas: ";
+        menu >> x_str;
+        x = stoi(x_str);
+        menu.clear();
+    } while(x <= 15);
+
+    do {
+        menu << "Numero de colunas: ";
+        menu >> y_str;
+        y = stoi(y_str);
+        menu.clear();
+    } while (y <= 15);
 }
 
