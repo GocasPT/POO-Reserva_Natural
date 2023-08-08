@@ -1,0 +1,5 @@
+C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/build/CMakeFiles/POO-Reserva_Natural.dir
+C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/build/CMakeFiles/package.dir
+C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/build/CMakeFiles/package_source.dir
+C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/build/CMakeFiles/edit_cache.dir
+C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/build/CMakeFiles/rebuild_cache.dir

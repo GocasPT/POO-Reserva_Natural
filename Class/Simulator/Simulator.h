@@ -8,34 +8,37 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <fstream>
+#include <regex>
+
 #include "Reserve.h"
 #include "curses.h"
 #include "Terminal.h"
 
 class Simulator {
-    int m_inSimulation;
-    int m_NL, m_NC;
-    int m_interaction;
-    int m_x, m_y;
-    int m_id;
-    bool m_moveX, m_moveY;
-    std::string m_storeName;
-    Reserve*  m_reserve_ptr;
-    term::Terminal &t;
-    term::Window m_reserve_w, m_info_w, m_command_w, m_error_w, m_char_w, m_modifier_w, m_list_w;
+    bool _inSimulation;
+    int _interaction;
+    int _id;
+    std::string _storeName;
+    Reserve*  _reserve_ptr;
 
 public:
-    Simulator(int L, int C);    //Construçao do objecto Simulador
-    //Simulator(Simulator &simulador);    //Serve para guardar o estado do simulador na memoria
+    Simulator();    //Construçao do objecto Simulador
 
-    void initSimulator();   //Iniciar o Simulador
-    void startSimulator();  //Iniciar o Simulador
-    void showSimulator();   //Mostrar o Simulador
+    void start();
+    void initReserve(int x, int y);
+    void exit();
 
-    std::string getStoreName();
-    std::string getInfo(int x, int y);
+    int getColNum() const;
+    int getRowNum() const;
+    std::string getName() const;
+    //TODO: verifica o return desta função (string ou ostringstream?)
+    std::string getInfo(int x, int y) const;
+    char** getBoard() const;
+    bool inSimulation() const;
 
-    bool validCommand(std::istringstream &command); //Validar o comandos lidos (teclado ou string do ficheiro)
+    bool addAnimal(int x, int y);
+    bool addFood(int x, int y);
 
     ~Simulator();   //Destrutor do objecto Simulador
 };

@@ -1,0 +1,1 @@
+"./build/POO-Reserva_Natural.exe" & pause

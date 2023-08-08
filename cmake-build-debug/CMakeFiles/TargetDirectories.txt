@@ -1,3 +1,0 @@
-C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/cmake-build-debug/CMakeFiles/POO-Reserva_Natural.dir
-C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Guilherme Camacho/Desktop/Trabalhos/2 ano/1 semestre/POO/POO-Reserva_Natural/cmake-build-debug/CMakeFiles/rebuild_cache.dir

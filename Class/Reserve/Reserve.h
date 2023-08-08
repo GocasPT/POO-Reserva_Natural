@@ -7,30 +7,34 @@
 
 #include <ostream>
 #include <vector>
+#include <sstream>
+#include <typeinfo>
+#include "Entity.h"
 #include "Animal.h"
 #include "Food.h"
 
 class Reserve {
-    int m_NL;
-    int m_NC;
-    void*** m_grid;
-    Animal* m_animals_list;
-    Food* m_foods_list;
+    int _NR;                                                // Números de linhas
+    int _NC;                                                // Números de colunas
+    std::string _name;
+    std::vector<std::vector<std::vector<Entity>>> _board;   //  Board 2D com a lista de animais que podem ficar numa zona
+    std::vector<Animal> _listAnimal;                        // Lista de animais
+    std::vector<Food> _listFood;                           //Lista de comida
 
 public:
-    Reserve(int NL, int NC);
-
-    void init();
+    Reserve(int NR, int NC);
 
     int getRow() const;
     int getColum() const;
-    void*** getGrid() const;
+    std::string getName() const;
+    std::vector<std::vector<std::vector<Entity>>> getBoard() const;
+    std::vector<Animal> getListAnimal() const;
+    std::vector<Food> getListFood() const;
 
-    void addAnimal(int id, int x, int y);
-    void addFood(int id, int x, int y);
-
-    void removeAnimal(int id);
-    void removeFood(int id);
+    bool addAnimal(int id, int x, int y);
+    bool removeAnimal(int id);
+    bool addFood(int id, int x, int y);
+    bool removeFood(int id);
 
     ~Reserve();
 };
