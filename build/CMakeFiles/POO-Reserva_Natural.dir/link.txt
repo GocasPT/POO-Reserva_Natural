@@ -1,3 +1,0 @@
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E rm -f CMakeFiles\POO-Reserva_Natural.dir/objects.a
-C:\MinGW\bin\ar.exe qc CMakeFiles\POO-Reserva_Natural.dir/objects.a @CMakeFiles\POO-Reserva_Natural.dir\objects1
-C:\MinGW\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\POO-Reserva_Natural.dir/objects.a -Wl,--no-whole-archive -o POO-Reserva_Natural.exe -Wl,--out-implib,libPOO-Reserva_Natural.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\POO-Reserva_Natural.dir\linkLibs.rsp
