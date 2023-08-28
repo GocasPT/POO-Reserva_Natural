@@ -1,35 +1,69 @@
-//
-// Created by Guilherme Camacho on 11/11/2022.
-//
-
 #include "Reserve.h"
 
-Reserve::Reserve(int NR, int NC):   _NR(NR), _NC(NC),
-                                    _name("Teste") {
-    _board.resize(NR, std::vector<std::vector<Entity>>(NC));
+Reserve::Reserve(const int numRow, const int numColunm) : NR(numRow), NC(numColunm) {
+    grid.resize(NR);
+    for (int i = 0; i < NR; ++i) {
+        grid[i].resize(NC);
+        for (int j = 0; j < NC; ++j) {
+            grid[i][j].resize(0);
+        }
+    }
 }
 
-int Reserve::getRow() const { return _NR; }
-int Reserve::getColum() const { return  _NC; }
-std::string Reserve::getName() const { return _name; }
-std::vector<std::vector<std::vector<Entity>>> Reserve::getBoard() const { return _board; }
-std::vector<Animal> Reserve::getListAnimal() const { return _listAnimal; }
-std::vector<Food> Reserve::getListFood() const { return _listFood; }
-
-bool Reserve::addAnimal(int id, int x, int y) {
-    //m_animals.push_back(*new Animal(id, x, y));
-    //m_grid[x][y] = m_animals.back().getVisual();
-}
-bool Reserve::removeAnimal(int id) {
-
-}
-bool Reserve::addFood(int id, int x, int y) {
-    //m_foods.push_back(*new Food(id, x, y));
-    //m_grid[x][y] = m_foods.back().getVisual();
-}
-bool Reserve::removeFood(int id) {
-
+Reserve::Reserve(const Reserve &obj) : NR(obj.NR), NC(obj.NC), grid(obj.grid) {
+    grid.resize(NR);
+    for (int i = 0; i < NR; ++i) {
+        grid[i].resize(NC);
+        for (int j = 0; j < NC; ++j) {
+            for (int e = 0; e < obj.grid[i][j].size(); e++) {
+                grid[i][j].push_back(obj.grid[i][j][e]);
+            }
+        }
+    }
 }
 
-// falta libertar memoria das cenas
-Reserve::~Reserve() = default;
+Reserve Reserve::operator=(const Reserve &obj) {
+    if (this == &obj) *this;
+
+    for (int i = 0; i < NR; ++i) {
+        for (int j = 0; j < NC; ++j) {
+            grid[i][j].clear();
+        }
+    }
+    grid = obj.grid;
+
+    return *this;
+}
+
+bool Reserve::addEntity(int x, int y, int id) {
+    grid[y][x].push_back(std::make_unique<Entity>(id));
+
+    return true;
+}
+
+std::string Reserve::getGrid() const {
+    std::stringstream ss;
+
+    for (int y = 0; y < NR; y++) {
+        for (int x = 0; x < NC; x++) {
+            if (grid[y][x].size() != 0) {
+                ss << grid[y][x][0]->getSprite();
+            } else {
+                ss << '_';
+            }
+        }
+        ss << "\n";
+    }
+
+    return ss.str();
+}
+
+Reserve::~Reserve() {
+    /* for (int y = 0; y < NR; y++) {
+        for (int x = 0; x < NC; x) {
+            for (int e = 0; e < grid[y][x].size(); e++) {
+                delete grid[y][x][e];
+            }
+        }
+    } */
+}

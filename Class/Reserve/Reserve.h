@@ -1,43 +1,36 @@
-//
-// Created by Guilherme Camacho on 11/11/2022.
-//
-
 #ifndef RESERVE_H
 #define RESERVE_H
 
-#include <ostream>
-#include <vector>
+#include <memory>
 #include <sstream>
-#include <typeinfo>
+#include <string>
+#include <vector>
+
 #include "Entity.h"
-#include "Animal.h"
-#include "Food.h"
+/*#include "Animal.h"
+#include "Food.h" */
+
+#define MIN_SIZE 16
+#define MAX_SIZE 500
+
+// TODO: make the descritions
 
 class Reserve {
-    int _NR;                                                // Números de linhas
-    int _NC;                                                // Números de colunas
-    std::string _name;
-    std::vector<std::vector<std::vector<Entity>>> _board;   //  Board 2D com a lista de animais que podem ficar numa zona
-    std::vector<Animal> _listAnimal;                        // Lista de animais
-    std::vector<Food> _listFood;                           //Lista de comida
+    const int NR;                                                         //  Number of row of the reserve
+    const int NC;                                                         //  Number of colunm of the reserve
+    std::vector<std::vector<std::vector<std::unique_ptr<Entity>>>> grid;  //  Grid of the reserver
 
-public:
-    Reserve(int NR, int NC);
+   public:
+    Reserve(const int numRow, const int numColunm);  //  Constructor of Reserve object
+    Reserve(const Reserve& obj);                     //  Copy
 
-    int getRow() const;
-    int getColum() const;
-    std::string getName() const;
-    std::vector<std::vector<std::vector<Entity>>> getBoard() const;
-    std::vector<Animal> getListAnimal() const;
-    std::vector<Food> getListFood() const;
+    Reserve operator=(const Reserve& obj);  //  Set Reserve values from other Resever object
 
-    bool addAnimal(int id, int x, int y);
-    bool removeAnimal(int id);
-    bool addFood(int id, int x, int y);
-    bool removeFood(int id);
+    bool addEntity(int x, int y, int id);  //  Function to add an Entity of grid
 
-    ~Reserve();
+    std::string getGrid() const;  //  Getter of Grid [string]
+
+    ~Reserve();  //  Deconstructor of Reserve object
 };
 
-
-#endif //RESERVE_H
+#endif  // RESERVE_H

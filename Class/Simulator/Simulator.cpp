@@ -1,44 +1,54 @@
-//
-// Created by Guilherme Camacho on 11/11/2022.
-//
-
 #include "Simulator.h"
 
+Simulator::Simulator() : ptr_reserve(nullptr), id(1), interation(0), inSimulation(false){};
 
-Simulator::Simulator() :    _inSimulation(false),
-                            _interaction(0),
-                            _id(1) {
-    start();
+void Simulator::startSimulation() {
+    if (ptr_reserve == nullptr) return;
+
+    inSimulation = true;
 }
 
-void Simulator::start() { _inSimulation = true; }
-void Simulator::initReserve(int x, int y) { _reserve_ptr = new Reserve(x, y); }
-void Simulator::exit() { delete _reserve_ptr; }
+void Simulator::exitSimulation() {
+    if (!inSimulation) return;
 
-int Simulator::getColNum() const { return _reserve_ptr->getColum(); }
-int Simulator::getRowNum() const { return _reserve_ptr->getRow(); }
-std::string Simulator::getName() const { return _reserve_ptr->getName(); }
-std::string Simulator::getInfo(int x, int y) const {}
-//TODO: verificar o getBoard pq o Simulator faz +/- ou q?
-char** Simulator::getBoard() const {
-    char **board = new char*[getRowNum()];
-    std::vector<std::vector<std::vector<Entity>>> boardCopy = _reserve_ptr->getBoard();
-
-
-
-    return board;
+    inSimulation = false;
 }
-bool Simulator::inSimulation() const { return _inSimulation; }
 
-bool Simulator::addAnimal(int x, int y) {
-    _reserve_ptr->addAnimal(_id, x, y);
-    _id++;
+void Simulator::initReserve(const int numRows, const int numColunm) {
+    ptr_reserve = std::make_unique<Reserve>(Reserve(numRows, numColunm));
+}
+
+void Simulator::nextInteration() {
+    if (!inSimulation) return;
+
+    addEntity(1, 1);
+    std::cout << ptr_reserve->getGrid();
+}
+
+bool Simulator::saveReserveState(std::string name) {
+    if (!inSimulation) return false;
+    if (list_reserves.find(name) == list_reserves.end()) return false;
+
+    // TODO: copy the smart point to an new one
+    // list_reserves[name] = std::make_unique<Reserve>(Reserve(*ptr_reserve));
+
     return true;
 }
-bool Simulator::addFood(int x, int y) {
-    _reserve_ptr->addFood(_id, x, y);
-    _id++;
+
+bool Simulator::loadReserveState(std::string name) {
+    if (!inSimulation) return false;
+
     return true;
 }
 
-Simulator::~Simulator() { delete _reserve_ptr; }
+void Simulator::addEntity(const int x, const int y) {
+    ptr_reserve->addEntity(x, y, id++);
+};
+
+std::string Simulator::getReserve() const { ptr_reserve->getGrid(); }
+std::string Simulator::getInfo() const {}
+std::string Simulator::getAnimalList() const {}
+std::string Simulator::getFoodList() const {}
+std::string Simulator::getError() const {}
+
+Simulator::~Simulator() { exitSimulation(); };

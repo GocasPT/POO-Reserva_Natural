@@ -1,18 +1,24 @@
-//
-// Created by Guilherme Camacho on 16/07/2023.
-//
+#ifndef ENTITY_H
+#define ENTITY_H
 
-#ifndef POO_RESERVA_NATURAL_ENTITY_H
-#define POO_RESERVA_NATURAL_ENTITY_H
+#include <iostream>
+
+// TODO: make the descritions
 
 class Entity {
-    char _char;
+    const int id;       //  Entity ID
+    const char sprite;  //  Entity char represetation
 
-public:
-    Entity();
-    char getChar();
-    ~Entity();
+   public:
+    Entity(const int id);       //  Constructor of Entity object
+    Entity(const Entity& obj);  //  Copy
+
+    Entity& operator=(const Entity& other);
+
+    const int getId() const;
+    const char getSprite() const;  //  Getter of char represetation
+
+    ~Entity();  //  Deconstructor of Entity object
 };
 
-
-#endif //POO_RESERVA_NATURAL_ENTITY_H
+#endif  // ENTITY_H
