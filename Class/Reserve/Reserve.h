@@ -13,24 +13,37 @@
 #define MIN_SIZE 16
 #define MAX_SIZE 500
 
+typedef std::vector<std::vector<std::vector<std::unique_ptr<Entity>>>> Board;
+
 // TODO: make the descritions
 
 class Reserve {
-    const int NR;                                                         //  Number of row of the reserve
-    const int NC;                                                         //  Number of colunm of the reserve
-    std::vector<std::vector<std::vector<std::unique_ptr<Entity>>>> grid;  //  Grid of the reserver
+    const int NR;
+    const int NC;
+    Board grid;
+    std::unique_ptr<Entity> ptr_entity;
 
    public:
-    Reserve(const int numRow, const int numColunm);  //  Constructor of Reserve object
-    Reserve(const Reserve& obj);                     //  Copy
+    Reserve(int numRow, int numColumn);
+    Reserve(const Reserve& other);
 
-    Reserve operator=(const Reserve& obj);  //  Set Reserve values from other Resever object
+    Reserve operator=(const Reserve& other);
 
-    bool addEntity(int x, int y, int id);  //  Function to add an Entity of grid
+    bool addEntity(int x, int y, EntityTypes type, char species, int id);
+    bool killAnimal(int x, int y);
+    bool killAnimal(int id);
+    bool feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint);
+    bool feedAnimal(int id, int nutriocionPoint, int toxicPoint);
+    bool removeEntities(int x, int y);
 
-    std::string getGrid() const;  //  Getter of Grid [string]
+    Board getGrid() const;
+    int getNumRows() const;
+    int getNumColumn() const;
 
-    ~Reserve();  //  Deconstructor of Reserve object
+    // TODO: check this
+    std::vector<std::unique_ptr<Entity>> getPossition(int x, int y) const;
+    Entity getEntity(int id);
+    std::vector<Entity> getList();
 };
 
 #endif  // RESERVE_H

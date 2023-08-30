@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(
         Libary/Curses
         Libary/Terminal
+        Libary/utils
         
         Class/UI
 
@@ -38,17 +39,20 @@ add_executable(
         Libary/Terminal/Terminal.h
         Libary/Terminal/Terminal.cpp
 
+        Libary/utils/utils.h
+        Libary/utils/utils.cpp
+
         Class/UI/UI.cpp
         Class/UI/UI.h
 
-        #Class/Simulator/Simulator.cpp
-        #Class/Simulator/Simulator.h
+        Class/Simulator/Simulator.cpp
+        Class/Simulator/Simulator.h
 
-        #Class/Reserve/Reserve.cpp
-        #Class/Reserve/Reserve.h
+        Class/Reserve/Reserve.cpp
+        Class/Reserve/Reserve.h
 
-        #Class/Entity/Entity.cpp
-        #Class/Entity/Entity.h
+        Class/Entity/Entity.cpp
+        Class/Entity/Entity.h
 )
 
 target_link_libraries(${PROJECT_NAME} c:/PDCurses-3.9/wincon/pdcurses.a)

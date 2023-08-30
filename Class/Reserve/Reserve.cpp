@@ -1,69 +1,72 @@
 #include "Reserve.h"
 
-Reserve::Reserve(const int numRow, const int numColunm) : NR(numRow), NC(numColunm) {
-    grid.resize(NR);
-    for (int i = 0; i < NR; ++i) {
-        grid[i].resize(NC);
-        for (int j = 0; j < NC; ++j) {
+Reserve::Reserve(int numRow, int numColumn) : NR(numRow), NC(numColumn) {
+    grid.resize(numRow);
+    for (int i = 0; i < numRow; ++i) {
+        grid[i].resize(numColumn);
+        for (int j = 0; j < numColumn; ++j) {
             grid[i][j].resize(0);
         }
     }
 }
 
-Reserve::Reserve(const Reserve &obj) : NR(obj.NR), NC(obj.NC), grid(obj.grid) {
+Reserve::Reserve(const Reserve& other) : NR(other.NR), NC(other.NC), ptr_entity(nullptr) {
     grid.resize(NR);
     for (int i = 0; i < NR; ++i) {
         grid[i].resize(NC);
         for (int j = 0; j < NC; ++j) {
-            for (int e = 0; e < obj.grid[i][j].size(); e++) {
-                grid[i][j].push_back(obj.grid[i][j][e]);
+            for (int e = 0; e < other.grid[i][j].size(); e++) {
+                grid[i][j].push_back(std::make_unique<Entity>(*(other.grid[i][j][e])));
             }
         }
     }
 }
 
-Reserve Reserve::operator=(const Reserve &obj) {
-    if (this == &obj) *this;
-
-    for (int i = 0; i < NR; ++i) {
-        for (int j = 0; j < NC; ++j) {
-            grid[i][j].clear();
+Reserve Reserve::operator=(const Reserve& other) {
+    if (this != &other) {
+        grid.resize(NR);
+        for (int i = 0; i < NR; ++i) {
+            grid[i].resize(NC);
+            for (int j = 0; j < NC; ++j) {
+                for (int e = 0; e < other.grid[i][j].size(); e++) {
+                    grid[i][j].push_back(std::make_unique<Entity>(*(other.grid[i][j][e])));
+                }
+            }
         }
+        ptr_entity = nullptr;
     }
-    grid = obj.grid;
 
     return *this;
 }
 
-bool Reserve::addEntity(int x, int y, int id) {
+bool Reserve::addEntity(int x, int y, EntityTypes type, char species, int id) {
     grid[y][x].push_back(std::make_unique<Entity>(id));
 
     return true;
 }
 
-std::string Reserve::getGrid() const {
-    std::stringstream ss;
+bool Reserve::killAnimal(int x, int y) {}
+bool Reserve::killAnimal(int id) {}
+bool Reserve::feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint) {}
+bool Reserve::feedAnimal(int id, int nutriocionPoint, int toxicPoint) {}
+bool Reserve::removeEntities(int x, int y) {}
 
-    for (int y = 0; y < NR; y++) {
-        for (int x = 0; x < NC; x++) {
-            if (grid[y][x].size() != 0) {
-                ss << grid[y][x][0]->getSprite();
-            } else {
-                ss << '_';
+Board Reserve::getGrid() const {
+    Board copy;
+
+    copy.resize(NR);
+    for (int i = 0; i < NR; ++i) {
+        copy[i].resize(NC);
+        for (int j = 0; j < NC; ++j) {
+            copy[i][j].resize(grid[i][j].size());
+            for (int e = 0; e < grid[i][j].size(); e++) {
+                copy[i][j].push_back(std::make_unique<Entity>(*(grid[i][j][e])));
             }
         }
-        ss << "\n";
     }
 
-    return ss.str();
+    return copy;
 }
 
-Reserve::~Reserve() {
-    /* for (int y = 0; y < NR; y++) {
-        for (int x = 0; x < NC; x) {
-            for (int e = 0; e < grid[y][x].size(); e++) {
-                delete grid[y][x][e];
-            }
-        }
-    } */
-}
+int Reserve::getNumRows() const { return NR; }
+int Reserve::getNumColumn() const { return NC; }

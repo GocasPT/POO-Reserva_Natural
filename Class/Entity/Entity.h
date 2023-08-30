@@ -3,22 +3,25 @@
 
 #include <iostream>
 
+enum class EntityTypes {
+    animal,
+    food
+};
+
 // TODO: make the descritions
 
 class Entity {
-    const int id;       //  Entity ID
-    const char sprite;  //  Entity char represetation
+    const int id;
+    char sprite;
 
    public:
-    Entity(const int id);       //  Constructor of Entity object
-    Entity(const Entity& obj);  //  Copy
+    Entity(const int id);
+    Entity(const Entity& obj);
 
     Entity& operator=(const Entity& other);
 
-    const int getId() const;
-    const char getSprite() const;  //  Getter of char represetation
-
-    ~Entity();  //  Deconstructor of Entity object
+    int getId() const;
+    virtual char getSprite() const;
 };
 
 #endif  // ENTITY_H

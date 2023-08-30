@@ -14,26 +14,29 @@ void Simulator::exitSimulation() {
     inSimulation = false;
 }
 
-void Simulator::initReserve(const int numRows, const int numColunm) {
-    ptr_reserve = std::make_unique<Reserve>(Reserve(numRows, numColunm));
+void Simulator::initReserve(int numRows, int numColunm) {
+    ptr_reserve = std::make_unique<Reserve>(numRows, numColunm);
 }
 
-void Simulator::nextInteration() {
+void Simulator::nextInteration(int steps, int time) {
     if (!inSimulation) return;
-
-    addEntity(1, 1);
-    std::cout << ptr_reserve->getGrid();
 }
 
-bool Simulator::saveReserveState(std::string name) {
-    if (!inSimulation) return false;
-    if (list_reserves.find(name) == list_reserves.end()) return false;
+bool Simulator::addEntity(int x, int y, EntityTypes type, char species){/* return ptr_reserve->addEntity(x, y, type, species, id++); */};
 
-    // TODO: copy the smart point to an new one
-    // list_reserves[name] = std::make_unique<Reserve>(Reserve(*ptr_reserve));
+bool Simulator::killAnimal(int x, int y) {}
 
-    return true;
-}
+bool Simulator::killAnimal(int id) {}
+
+bool Simulator::feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint) {}
+
+bool Simulator::feedAnimal(int id, int nutriocionPoint, int toxicPoint) {}
+
+bool Simulator::removeFood(int x, int y) {}
+
+bool Simulator::removeFood(int id) {}
+
+bool Simulator::deleteEntities(int x, int y) {}
 
 bool Simulator::loadReserveState(std::string name) {
     if (!inSimulation) return false;
@@ -41,14 +44,26 @@ bool Simulator::loadReserveState(std::string name) {
     return true;
 }
 
-void Simulator::addEntity(const int x, const int y) {
-    ptr_reserve->addEntity(x, y, id++);
-};
+bool Simulator::saveReserveState(std::string name) {
+    if (!inSimulation) return false;
+    // if (list_reserves.find(name) == list_reserves.end()) return false;
 
-std::string Simulator::getReserve() const { ptr_reserve->getGrid(); }
-std::string Simulator::getInfo() const {}
+    // TODO: copy the smart point to an new one
+    // list_reserves[name] = std::make_unique<Reserve>(Reserve(*ptr_reserve));
+
+    return true;
+}
+
+Reserve Simulator::getReserve() const {
+    Reserve copy = (*ptr_reserve);
+    return copy;
+}
+
+std::string Simulator::getInfo(int x, int y) const {}
+std::string Simulator::getInfo(int id) const {}
 std::string Simulator::getAnimalList() const {}
-std::string Simulator::getFoodList() const {}
+std::string Simulator::getViewAnimalList() const {}
 std::string Simulator::getError() const {}
+bool Simulator::isSimulating() const { return inSimulation; }
 
 Simulator::~Simulator() { exitSimulation(); };
