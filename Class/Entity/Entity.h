@@ -1,14 +1,12 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <iostream>
-
 enum class EntityTypes {
     animal,
     food
 };
 
-// TODO: make the descritions
+// TODO: make the descritions and check more methods
 
 class Entity {
     const int id;
@@ -21,7 +19,8 @@ class Entity {
     Entity& operator=(const Entity& other);
 
     int getId() const;
-    virtual char getSprite() const;
+    char getSprite() const;
+    // virtual char getSprite() const;
 };
 
 #endif  // ENTITY_H

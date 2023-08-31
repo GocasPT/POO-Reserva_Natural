@@ -17,7 +17,6 @@
 
 #define MSG_ERROR_ID "Erro ao introduzir o ID"
 #define MSG_ERROR_COOR "Erro ao introduzir as coordenadas"
-#define MSG_ERROR_STOI "Erro na conversao de string a inteiro"
 #define MSG_ERROR_ARGS "Falta de argumentos"
 
 typedef std::unique_ptr<term::Window> ptr_window;

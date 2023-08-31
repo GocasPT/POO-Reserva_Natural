@@ -27,14 +27,14 @@ class Reserve {
     Reserve(int numRow, int numColumn);
     Reserve(const Reserve& other);
 
-    Reserve operator=(const Reserve& other);
-
     bool addEntity(int x, int y, EntityTypes type, char species, int id);
     bool killAnimal(int x, int y);
     bool killAnimal(int id);
     bool feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint);
     bool feedAnimal(int id, int nutriocionPoint, int toxicPoint);
-    bool removeEntities(int x, int y);
+    bool removeFood(int x, int y);
+    bool removeFood(int id);
+    bool deleteEntities(int x, int y);
 
     Board getGrid() const;
     int getNumRows() const;

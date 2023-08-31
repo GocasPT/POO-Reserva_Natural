@@ -22,21 +22,14 @@ void Simulator::nextInteration(int steps, int time) {
     if (!inSimulation) return;
 }
 
-bool Simulator::addEntity(int x, int y, EntityTypes type, char species){/* return ptr_reserve->addEntity(x, y, type, species, id++); */};
-
-bool Simulator::killAnimal(int x, int y) {}
-
-bool Simulator::killAnimal(int id) {}
-
-bool Simulator::feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint) {}
-
-bool Simulator::feedAnimal(int id, int nutriocionPoint, int toxicPoint) {}
-
-bool Simulator::removeFood(int x, int y) {}
-
-bool Simulator::removeFood(int id) {}
-
-bool Simulator::deleteEntities(int x, int y) {}
+bool Simulator::addEntity(int x, int y, EntityTypes type, char species) { return ptr_reserve->addEntity(x, y, type, species, id++); };
+bool Simulator::killAnimal(int x, int y) { return ptr_reserve->killAnimal(x, y); }
+bool Simulator::killAnimal(int id) { return ptr_reserve->killAnimal(id); }
+bool Simulator::feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint) { return ptr_reserve->feedAnimal(x, y, nutriocionPoint, toxicPoint); }
+bool Simulator::feedAnimal(int id, int nutriocionPoint, int toxicPoint) { return ptr_reserve->feedAnimal(id, nutriocionPoint, toxicPoint); }
+bool Simulator::removeFood(int x, int y) { return ptr_reserve->removeFood(x, y); }
+bool Simulator::removeFood(int id) { return ptr_reserve->removeFood(id); }
+bool Simulator::deleteEntities(int x, int y) { return ptr_reserve->deleteEntities(x, y); }
 
 bool Simulator::loadReserveState(std::string name) {
     if (!inSimulation) return false;
@@ -55,7 +48,7 @@ bool Simulator::saveReserveState(std::string name) {
 }
 
 Reserve Simulator::getReserve() const {
-    Reserve copy = (*ptr_reserve);
+    Reserve copy(*ptr_reserve);
     return copy;
 }
 
@@ -65,5 +58,3 @@ std::string Simulator::getAnimalList() const {}
 std::string Simulator::getViewAnimalList() const {}
 std::string Simulator::getError() const {}
 bool Simulator::isSimulating() const { return inSimulation; }
-
-Simulator::~Simulator() { exitSimulation(); };

@@ -2,45 +2,43 @@
 
 Reserve::Reserve(int numRow, int numColumn) : NR(numRow), NC(numColumn) {
     grid.resize(numRow);
-    for (int i = 0; i < numRow; ++i) {
-        grid[i].resize(numColumn);
-        for (int j = 0; j < numColumn; ++j) {
-            grid[i][j].resize(0);
-        }
+    for (int y = 0; y < numRow; y++) {
+        grid[y].resize(numColumn);
     }
 }
 
-Reserve::Reserve(const Reserve& other) : NR(other.NR), NC(other.NC), ptr_entity(nullptr) {
+// TODO: duplicate the list
+Reserve::Reserve(const Reserve& other) : NR(other.NR), NC(other.NC) {
     grid.resize(NR);
-    for (int i = 0; i < NR; ++i) {
-        grid[i].resize(NC);
-        for (int j = 0; j < NC; ++j) {
-            for (int e = 0; e < other.grid[i][j].size(); e++) {
-                grid[i][j].push_back(std::make_unique<Entity>(*(other.grid[i][j][e])));
-            }
+    for (int y = 0; y < NR; y++) {
+        grid[y].resize(NC);
+
+        for (int x = 0; x < NC; x++) {
+            if (!other.grid[y][x].size()) continue;
+
+            for (const auto& entityPtr : other.grid[y][x]) {
+                grid[y][x].push_back(std::make_unique<Entity>(*entityPtr));
+            };
         }
     }
 }
 
-Reserve Reserve::operator=(const Reserve& other) {
-    if (this != &other) {
-        grid.resize(NR);
-        for (int i = 0; i < NR; ++i) {
-            grid[i].resize(NC);
-            for (int j = 0; j < NC; ++j) {
-                for (int e = 0; e < other.grid[i][j].size(); e++) {
-                    grid[i][j].push_back(std::make_unique<Entity>(*(other.grid[i][j][e])));
-                }
-            }
-        }
-        ptr_entity = nullptr;
-    }
-
-    return *this;
-}
-
+// TODO: return false when error apper
 bool Reserve::addEntity(int x, int y, EntityTypes type, char species, int id) {
-    grid[y][x].push_back(std::make_unique<Entity>(id));
+    std::unique_ptr<Entity> newEntity;
+
+    /* switch (type) {
+        case EntityTypes::animal:
+            // std::make_unique<Anmimal>();
+            break;
+
+        case EntityTypes::food:
+            // std::make_unique<Food>();
+            break;
+    } */
+
+    newEntity = std::make_unique<Entity>(id);
+    grid[y][x].push_back(std::move(newEntity));
 
     return true;
 }
@@ -49,18 +47,19 @@ bool Reserve::killAnimal(int x, int y) {}
 bool Reserve::killAnimal(int id) {}
 bool Reserve::feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint) {}
 bool Reserve::feedAnimal(int id, int nutriocionPoint, int toxicPoint) {}
-bool Reserve::removeEntities(int x, int y) {}
+bool Reserve::removeFood(int x, int y) {}
+bool Reserve::removeFood(int id) {}
+bool Reserve::deleteEntities(int x, int y) {}
 
 Board Reserve::getGrid() const {
     Board copy;
 
     copy.resize(NR);
-    for (int i = 0; i < NR; ++i) {
-        copy[i].resize(NC);
-        for (int j = 0; j < NC; ++j) {
-            copy[i][j].resize(grid[i][j].size());
-            for (int e = 0; e < grid[i][j].size(); e++) {
-                copy[i][j].push_back(std::make_unique<Entity>(*(grid[i][j][e])));
+    for (int x = 0; x < NR; x++) {
+        copy[x].resize(NC);
+        for (int y = 0; y < NC; y++) {
+            for (const auto& entityPtr : grid[y][x]) {
+                copy[x][y].push_back(std::make_unique<Entity>(*entityPtr));
             }
         }
     }

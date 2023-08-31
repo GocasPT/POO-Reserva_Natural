@@ -84,9 +84,12 @@ void UI::menu() {
     } while (columns < MIN_SIZE || columns > MAX_SIZE);
 
     winMenu->clear();
+
     simulator.initReserve(rows, columns);
+
     if (rows <= WIN_RESERVE_HEIGTH) canMoveY = false;
     if (columns <= WIN_RESERVE_HEIGTH) canMoveX = false;
+
     configWindows();
     startSimulator();
 }
@@ -162,6 +165,7 @@ bool UI::validCommand(std::istringstream& command) {
         std::string subs;
         command >> subs;
 
+        // Converte the string to lower case
         std::transform(subs.begin(), subs.end(), subs.begin(), ::tolower);
 
         args.push_back(subs);
@@ -183,11 +187,13 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is not a number
         if (utils::isNumber(args[1])) {
             writeMessage((*winError), "Erro ao introduzir tipo de especia");
             return true;
         }
 
+        // Check with animal specie is [for the message]
         switch (args[1][0]) {
             case 'c':
                 specie = "coelho";
@@ -215,6 +221,7 @@ bool UI::validCommand(std::istringstream& command) {
         }
 
         switch (args.size()) {
+            // Random location
             case 2:
                 x = (rand() % 30);
                 y = (rand() % 30);
@@ -223,7 +230,9 @@ bool UI::validCommand(std::istringstream& command) {
                 // y = (rand() % simulator.getReserve().getNumRows());
                 break;
 
+            // Selected location
             case 4:
+                // Check if specie argument is a number
                 if (!utils::isNumber(args[2]) || !utils::isNumber(args[3])) {
                     writeMessage((*winError), MSG_ERROR_COOR);
                     return true;
@@ -235,9 +244,12 @@ bool UI::validCommand(std::istringstream& command) {
                 break;
         }
 
+        // Write the event and add the animal
         string << "Adicionar animal da especie " << specie << " nas coordenadas [" << x << ", " << y << "]" << endl;
         writeMessage((*winInfo), string.str());
-        simulator.addEntity(x, y, EntityTypes::animal, args[1][0]);
+        if (!simulator.addEntity(x, y, EntityTypes::animal, args[1][0])) {
+            writeMessage((*winError), "Erro na criacao do animal");
+        }
 
         return true;
     }
@@ -254,22 +266,24 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[1]) || !utils::isNumber(args[2])) {
             writeMessage((*winError), MSG_ERROR_COOR);
             return true;
         }
 
+        // Write the event and kill the animal
         string << "Matando animal nas coordendas []" << args[2] << ", " << args[1] << "]" << endl;
         writeMessage((*winInfo), string.str());
-        // TODO: debug
-        simulator.killAnimal(std::stoi(args[1]), std::stoi(args[2]));
+        if (!simulator.killAnimal(std::stoi(args[1]), std::stoi(args[2]))) {
+            writeMessage((*winError), "Erro na matanca do animal");
+        }
 
         return true;
     }
 
     // Kill animal by id command
     else if (args[0] == "killid") {
-        // TODO: debug
         std::ostringstream string;
 
         // If the arguments are missing, show the correct way to use the command
@@ -280,11 +294,13 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[1])) {
             writeMessage((*winError), MSG_ERROR_ID);
             return true;
         }
 
+        // Write the event and kill the animal
         string << "Matando animal de ID " << args[1] << endl;
         writeMessage((*winInfo), string.str());
         simulator.killAnimal(std::stoi(args[1]));
@@ -307,11 +323,13 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is not a number
         if (utils::isNumber(args[1])) {
             writeMessage((*winError), "Erro ao introduzir tipo de comida");
             return true;
         }
 
+        // Check with food type is [for the message]
         switch (args[1][0]) {
             case 'r':
                 type = "relva";
@@ -339,6 +357,7 @@ bool UI::validCommand(std::istringstream& command) {
         }
 
         switch (args.size()) {
+            // Random location
             case 2:
                 x = (rand() % 30);
                 y = (rand() % 30);
@@ -347,7 +366,9 @@ bool UI::validCommand(std::istringstream& command) {
                 // y = (rand() % simulator.getReserve().getNumRows());
                 break;
 
+            // Selected location
             case 4:
+                // Check if specie argument is a number
                 if (!utils::isNumber(args[2]) || !utils::isNumber(args[3])) {
                     writeMessage((*winError), MSG_ERROR_COOR);
                     return true;
@@ -359,16 +380,18 @@ bool UI::validCommand(std::istringstream& command) {
                 break;
         }
 
+        // Write the event and add the food
         string << "Adicionar comida do tipo " << type << " nas coordenadas " << x << " " << y << endl;
         writeMessage((*winInfo), string.str());
-        simulator.addEntity(x, y, EntityTypes::food, args[1][0]);
+        if (!simulator.addEntity(x, y, EntityTypes::food, args[1][0])) {
+            writeMessage((*winError), "Erro na criacao da comida");
+        }
 
         return true;
     }
 
     // Feed animal command
     else if (args[0] == "feed") {
-        // TODO: debug
         std::ostringstream string;
 
         // If the arguments are missing, show the correct way to use the command
@@ -379,26 +402,30 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[1]) || !utils::isNumber(args[2])) {
             writeMessage((*winError), MSG_ERROR_COOR);
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[3]) || !utils::isNumber(args[4])) {
             writeMessage((*winError), "Os valores de nutricao ou de toxicidadde sao invalido");
             return true;
         }
 
+        // Write the event and feed the animal
         string << "Alimentar animal de ID " << args[1] << " com " << args[2] << " pontos de nutricao e " << args[3] << " pontos de toxicidade" << endl;
         writeMessage((*winInfo), string.str());
-        simulator.feedAnimal(std::stoi(args[1]), std::stoi(args[2]), std::stoi(args[3]));
+        if (!simulator.feedAnimal(std::stoi(args[1]), std::stoi(args[2]), std::stoi(args[3]))) {
+            writeMessage((*winError), "Erro na alimentacao do animal");
+        }
 
         return true;
     }
 
     // Feed animal by id command
     else if (args[0] == "feedid") {
-        // TODO: debug
         std::ostringstream string;
 
         // If the arguments are missing, show the correct way to use the command
@@ -409,28 +436,32 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[1])) {
             writeMessage((*winError), MSG_ERROR_ID);
             return true;
             ;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[2]) || !utils::isNumber(args[3])) {
             writeMessage((*winError), "Os valores de nutricao ou de toxicidadde sao invalido");
             return true;
             ;
         }
 
+        // Write the event and feed the animal
         string << "Alimentar animal de ID " << args[1] << " com " << args[2] << " pontos de nutricao e " << args[3] << " pontos de toxicidade" << endl;
         writeMessage((*winInfo), string.str());
-        simulator.feedAnimal(std::stoi(args[1]), std::stoi(args[2]), std::stoi(args[3]));
+        if (!simulator.feedAnimal(std::stoi(args[1]), std::stoi(args[2]), std::stoi(args[3]))) {
+            writeMessage((*winError), "Erro na alimentacao do animal");
+        }
 
         return true;
     }
 
     // Remove food command
     else if (args[0] == "nofood") {
-        // TODO: debug
         std::ostringstream string;
 
         // If the arguments are missing, show the correct way to use the command
@@ -443,26 +474,36 @@ bool UI::validCommand(std::istringstream& command) {
         }
 
         switch (args.size()) {
+            // Select by ID
             case 2:
+                // Check if specie argument is a number
                 if (!utils::isNumber(args[1])) {
                     writeMessage((*winError), MSG_ERROR_ID);
                     break;
                 }
 
+                // Write the event and remove the food
                 string << "Remover alimento de ID " << args[1] << endl;
                 writeMessage((*winInfo), string.str());
-                simulator.removeFood(std::stoi(args[1]));
+                if (!simulator.removeFood(std::stoi(args[1]))) {
+                    writeMessage((*winError), "Erro na remocao do alimento");
+                }
                 break;
 
+            // Select by coordenates
             case 3:
+                // Check if specie argument is a number
                 if (!utils::isNumber(args[1]) || !utils::isNumber(args[2])) {
                     writeMessage((*winError), MSG_ERROR_COOR);
                     break;
                 }
 
+                // Write the event and remove the food
                 string << "Remover alimento nas coordenadas " << args[1] << " " << args[2] << endl;
                 writeMessage((*winInfo), string.str());
-                simulator.removeFood(std::stoi(args[1]), std::stoi(args[2]));
+                if (!simulator.removeFood(std::stoi(args[1]), std::stoi(args[2]))) {
+                    writeMessage((*winError), "Erro na remocao do alimento");
+                }
                 break;
         }
 
@@ -471,9 +512,9 @@ bool UI::validCommand(std::istringstream& command) {
 
     // Remove entities command
     else if (args[0] == "empty") {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 3) {
             string << MSG_ERROR_ARGS << endl
                    << "empty <linha> <coluna>" << endl;
@@ -481,23 +522,27 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[1]) || !utils::isNumber(args[2])) {
             writeMessage((*winError), MSG_ERROR_COOR);
             return true;
         }
 
+        // Write the event and remove all entities in the location
         string << "A remover todas as entidades nas coordenadas " << args[1] << " " << args[2] << endl;
         writeMessage((*winInfo), string.str());
-        simulator.deleteEntities(std::stoi(args[1]), std::stoi(args[2]));
+        if (!simulator.deleteEntities(std::stoi(args[1]), std::stoi(args[2]))) {
+            writeMessage((*winError), "Erro na remocao de todas as entidades");
+        }
 
         return true;
     }
 
     // Get information by position command
     else if (args[0] == "see") {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 3) {
             string << MSG_ERROR_ARGS << endl
                    << "see <linha> <coluna>" << endl;
@@ -505,23 +550,25 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[1]) || !utils::isNumber(args[2])) {
             writeMessage((*winError), MSG_ERROR_COOR);
             return true;
         }
 
+        // Write the event and show all information of the entity on the location
         string << "A ver as informacoes da entidade nas coordenadas " << args[1] << " " << args[2] << endl;
         writeMessage((*winInfo), string.str());
-        simulator.getInfo(std::stoi(args[1]), std::stoi(args[2]));
+        writeMessage((*winInfo), simulator.getInfo(std::stoi(args[1]), std::stoi(args[2])));
 
         return true;
     }
 
     // Fet information by ID command
     else if (args[0] == "info") {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 2) {
             string << MSG_ERROR_ARGS << endl
                    << "info <ID>" << endl;
@@ -529,24 +576,26 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Check if specie argument is a number
         if (!utils::isNumber(args[1])) {
             writeMessage((*winError), MSG_ERROR_ID);
             return true;
         }
 
+        // Write the event and show all information of the entity with the ID
         string << "A ver as informacoes da entidade de id " << args[1] << endl;
         writeMessage((*winInfo), string.str());
-        simulator.getInfo(std::stoi(args[1]));
+        writeMessage((*winInfo), simulator.getInfo(std::stoi(args[1])));
 
         return true;
     }
 
     // Next interaction command
     else if (args[0] == "n") {
-        // TODO: debug
         std::ostringstream string;
         int steps = 1, timer = 0;
 
+        // If the arguments are missing, show the correct way to use the command
         if (!(args.size() == 1 || args.size() == 2 || args.size() == 3)) {
             string << MSG_ERROR_ARGS << endl
                    << "n" << endl
@@ -558,10 +607,13 @@ bool UI::validCommand(std::istringstream& command) {
         }
 
         switch (args.size()) {
+            // Default config
             case 1:
                 break;
 
+            // Set steps
             case 2:
+                // Check if specie argument is a number
                 if (!utils::isNumber(args[1])) {
                     writeMessage((*winError), "Numero de instacias para avancar invalido");
                     return true;
@@ -570,12 +622,15 @@ bool UI::validCommand(std::istringstream& command) {
                 steps = std::stoi(args[1]);
                 break;
 
+            // Set steps and timer
             case 3:
+                // Check if specie argument is a number
                 if (!utils::isNumber(args[1])) {
                     writeMessage((*winError), "Numero de instacias para avancar invalido");
                     return true;
                 }
 
+                // Check if specie argument is not a number
                 if (!utils::isNumber(args[2])) {
                     writeMessage((*winError), "Numero de espera entre instacias para avancar invalido");
                     return true;
@@ -586,6 +641,7 @@ bool UI::validCommand(std::istringstream& command) {
                 break;
         }
 
+        // Write the event and do the interations
         string << "A avançar " << steps << "instancia(s) com " << timer << " segundos de espera" << endl;
         writeMessage((*winInfo), string.str());
         simulator.nextInteration(steps, timer);
@@ -595,9 +651,9 @@ bool UI::validCommand(std::istringstream& command) {
 
     // Show list of animals command
     else if (args[0] == "anim") {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 1) {
             string << MSG_ERROR_ARGS << endl
                    << "anim" << endl;
@@ -605,6 +661,7 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Write the event and show all animals in the reserve
         string << "A mostar a lista de animais na reserva" << endl;
         writeMessage((*winInfo), string.str());
         writeMessage((*winList), simulator.getAnimalList());
@@ -614,9 +671,9 @@ bool UI::validCommand(std::istringstream& command) {
 
     // Show list of animals on view camera command
     else if (args[0] == "visanim" && args.size() == 1) {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 1) {
             string << MSG_ERROR_ARGS << endl
                    << "visanim" << endl;
@@ -624,6 +681,7 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Write the event and show all animals in the reserve that are in the view camera
         string << "A mostar a lista de animais na reserva na visao atual" << endl;
         writeMessage((*winInfo), string.str());
         writeMessage((*winList), simulator.getViewAnimalList());
@@ -633,9 +691,9 @@ bool UI::validCommand(std::istringstream& command) {
 
     // Save reserve command
     else if (args[0] == "store") {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 2) {
             string << MSG_ERROR_ARGS << endl
                    << "store <nome>" << endl;
@@ -643,18 +701,20 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Write the event and save the reserve state
         string << "A guardar estado da reserva atual com o nome: " << args[1] << endl;
         writeMessage((*winInfo), string.str());
-        simulator.saveReserveState(args[1]);
-
+        if (simulator.saveReserveState(args[1])) {
+            writeMessage((*winError), "Erro na gravacao do estado da reserva");
+        }
         return true;
     }
 
     // Restore reserve command
     else if (args[0] == "restore" && args.size() == 2) {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 2) {
             string << MSG_ERROR_ARGS << endl
                    << "restore <nome>" << endl;
@@ -662,16 +722,18 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Write the event and load the reserve state selected
         string << "A carregar o estado da reserva com o nome: " << args[1] << endl;
         writeMessage((*winInfo), string.str());
-        simulator.loadReserveState(args[1]);
+        if (simulator.loadReserveState(args[1])) {
+            writeMessage((*winError), "Erro no carregamento do estado da reserva");
+        }
 
         return true;
     }
 
     // Load command
     else if (args[0] == "load") {
-        // TODO: debug
         // If the arguments are missing, show the correct way to use the command
         if (args.size() != 2) {
             std::ostringstream string;
@@ -681,18 +743,22 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Config the file path
         std::ostringstream fileNamePath;
         fileNamePath << "../" << args[1];
 
+        // Select the file command to read
         std::string line;
         std::ifstream input_file(fileNamePath.str());
 
         // TODO: input_file error
+        // Check if files is sucessed open
         if (!input_file) {
             writeMessage((*winError), "Ocorreu um erro ao abrir o ficheiro");
             return true;
         }
 
+        // Read all line and execute the command
         while (getline(input_file, line)) {
             std::istringstream lineFich(line);
 
@@ -704,6 +770,7 @@ bool UI::validCommand(std::istringstream& command) {
             validCommand(lineFich);
         }
 
+        // Close the file
         input_file.close();
 
         return true;
@@ -711,9 +778,9 @@ bool UI::validCommand(std::istringstream& command) {
 
     // Move view camera command
     else if (args[0] == "slide") {
-        // TODO: debug
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 1) {
             string << MSG_ERROR_ARGS << endl
                    << "slide" << endl;
@@ -721,6 +788,7 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Go to the slide state
         slideViewCam();
         return true;
     }
@@ -729,6 +797,7 @@ bool UI::validCommand(std::istringstream& command) {
     else if (args[0] == "exit") {
         std::ostringstream string;
 
+        // If the arguments are missing, show the correct way to use the command
         if (args.size() != 1) {
             string << MSG_ERROR_ARGS << endl
                    << "exit" << endl;
@@ -736,6 +805,7 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        // Close the simulation
         simulator.exitSimulation();
 
         return true;
@@ -745,6 +815,7 @@ bool UI::validCommand(std::istringstream& command) {
 }
 
 void UI::slideViewCam() {
+    // Check if can possible to move the view camera
     if (!canMoveX && !canMoveY) {
         writeMessage((*winInfo), "Nao vale a pena mover a camera");
         return;
@@ -754,12 +825,14 @@ void UI::slideViewCam() {
 
     (*winMofifier) << "Preciona 'Enter' para sair do modo 'slider'\n";
 
+    // Informs which axis cannot move
     if (!canMoveX)
         *winMofifier << "Nao vale a pena mover a camera no eixo X\n";
 
     if (!canMoveY)
         *winMofifier << "Nao vale a pena mover a camera no eixo Y\n";
 
+    // Loop to read the inputs and change the view camera
     do {
         updateBoard();
 

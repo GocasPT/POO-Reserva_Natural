@@ -42,17 +42,23 @@ add_executable(
         Libary/utils/utils.h
         Libary/utils/utils.cpp
 
-        Class/UI/UI.cpp
         Class/UI/UI.h
+        Class/UI/UI.cpp
 
-        Class/Simulator/Simulator.cpp
         Class/Simulator/Simulator.h
+        Class/Simulator/Simulator.cpp
 
-        Class/Reserve/Reserve.cpp
         Class/Reserve/Reserve.h
+        Class/Reserve/Reserve.cpp
 
-        Class/Entity/Entity.cpp
         Class/Entity/Entity.h
+        Class/Entity/Entity.cpp
+
+        Class/Entity/Animal/Animal.h
+        Class/Entity/Animal/Animal.cpp
+
+        Class/Entity/Food/Food.h
+        Class/Entity/Food/Food.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} c:/PDCurses-3.9/wincon/pdcurses.a)

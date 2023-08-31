@@ -42,8 +42,6 @@ class Simulator {
     std::string getViewAnimalList() const;
     std::string getError() const;
     bool isSimulating() const;
-
-    ~Simulator();
 };
 
 #endif  // SIMULATOR_H
