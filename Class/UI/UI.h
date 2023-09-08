@@ -8,6 +8,7 @@
 #include <sstream>
 #include <string>
 
+#include "Enums.h"
 #include "Simulator.h"
 #include "Terminal.h"
 #include "utils.h"

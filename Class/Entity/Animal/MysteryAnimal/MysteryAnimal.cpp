@@ -1,5 +1,3 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #include "MysteryAnimal.h"
+
+MysteryAnimal::MysteryAnimal(const Reserve& reserve, int id) : Animal(reserve, id, 'M', 10, 10, 10, 0) {}

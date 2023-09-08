@@ -1,5 +1,3 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #include "Steak.h"
+
+Steak::Steak(int id) : Food(id, 'b', 30, 10, 2, std::vector<std::string>{"carne", "ketchup"}) {}

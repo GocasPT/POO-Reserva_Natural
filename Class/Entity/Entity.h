@@ -1,26 +1,25 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-enum class EntityTypes {
-    animal,
-    food
-};
-
 // TODO: make the descritions and check more methods
+// TODO: search the virutal, inheritance and more
 
 class Entity {
+   protected:
     const int id;
-    char sprite;
+    const char sprite;
+    int lifeTime;
 
    public:
-    Entity(const int id);
-    Entity(const Entity& obj);
+    Entity(int id, char sprite, int lifeTime);
+    Entity(const Entity& other);
 
-    Entity& operator=(const Entity& other);
+    virtual void evolve();
+    void incressLifeTime();
 
     int getId() const;
     char getSprite() const;
-    // virtual char getSprite() const;
+    int getLifeTime() const;
 };
 
 #endif  // ENTITY_H

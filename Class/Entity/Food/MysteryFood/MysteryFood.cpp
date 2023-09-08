@@ -1,5 +1,3 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #include "MysteryFood.h"
+
+MysteryFood::MysteryFood(int id) : Food(id, 'a', 10, 10, 10, std::vector<std::string>{"misterio"}) {}

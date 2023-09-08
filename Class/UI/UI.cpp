@@ -29,9 +29,8 @@ void UI::menu() {
        << endl;
 
     os << endl
-       << "\t1 - Comecar o simulador" << endl;
-    ;
-    os << "\t2 - Sair do simulador" << endl
+       << "\t1 - Comecar o simulador" << endl
+       << "\t2 - Sair do simulador" << endl
        << endl
        << "Escolha: ";
 
@@ -86,6 +85,7 @@ void UI::menu() {
     winMenu->clear();
 
     simulator.initReserve(rows, columns);
+    simulator.configEntities();
 
     if (rows <= WIN_RESERVE_HEIGTH) canMoveY = false;
     if (columns <= WIN_RESERVE_HEIGTH) canMoveX = false;
@@ -137,16 +137,16 @@ void UI::configWindows() {
 void UI::updateBoard() {
     winReserve->clear();
 
-    int maxY = std::min((int)simulator.getReserve().getGrid().size(), WIN_RESERVE_HEIGTH);
-    int maxX = std::min((int)simulator.getReserve().getGrid()[0].size(), WIN_RESERVE_WITDH);
+    int maxY = std::min(simulator.getNumRows(), WIN_RESERVE_HEIGTH);
+    int maxX = std::min(simulator.getNumColumn(), WIN_RESERVE_WITDH);
 
     for (int y = offsetY; y < offsetY + maxY; y++) {
         for (int x = offsetX; x < offsetX + maxX; x++) {
-            if (!simulator.getReserve().getGrid()[y][x].size()) {
+            if (!simulator.getGrid()[y][x].size()) {
                 (*winReserve) << '_';
                 continue;
             }
-            (*winReserve) << simulator.getReserve().getGrid()[y][x][0]->getSprite();
+            (*winReserve) << simulator.getGrid()[y][x][0]->getSprite();
         }
         (*winReserve) << "\n";
     }
@@ -175,7 +175,7 @@ bool UI::validCommand(std::istringstream& command) {
     // Add animal command
     if (args[0] == "animal") {
         std::ostringstream string;
-        std::string specie;
+        AnimalSpice specie;
         int x, y;
 
         // If the arguments are missing, show the correct way to use the command
@@ -193,26 +193,33 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        string << "Adicionar animal da especie ";
+
         // Check with animal specie is [for the message]
         switch (args[1][0]) {
             case 'c':
-                specie = "coelho";
+                specie = AnimalSpice::rabbit;
+                string << "coelho";
                 break;
 
             case 'o':
-                specie = "ovela";
+                specie = AnimalSpice::sheep;
+                string << "ovelha";
                 break;
 
             case 'l':
-                specie = "lobo";
+                specie = AnimalSpice::wolf;
+                string << "lobo";
                 break;
 
             case 'g':
-                specie = "canguru";
+                specie = AnimalSpice::kangaroo;
+                string << "cangoro";
                 break;
 
             case 'm':
-                specie = "animal-misterio";
+                specie = AnimalSpice::mysteryAnimal;
+                string << "animal misterio";
                 break;
 
             default:
@@ -226,8 +233,8 @@ bool UI::validCommand(std::istringstream& command) {
                 x = (rand() % 30);
                 y = (rand() % 30);
 
-                // x = (rand() % simulator.getReserve().getNumColumn());
-                // y = (rand() % simulator.getReserve().getNumRows());
+                // x = (rand() % simulator.getNumColumn());
+                // y = (rand() % simulator.getNumRows());
                 break;
 
             // Selected location
@@ -245,9 +252,9 @@ bool UI::validCommand(std::istringstream& command) {
         }
 
         // Write the event and add the animal
-        string << "Adicionar animal da especie " << specie << " nas coordenadas [" << x << ", " << y << "]" << endl;
+        string << " nas coordenadas [" << x << ", " << y << "]" << endl;
         writeMessage((*winInfo), string.str());
-        if (!simulator.addEntity(x, y, EntityTypes::animal, args[1][0])) {
+        if (!simulator.addEntity(x, y, specie)) {
             writeMessage((*winError), "Erro na criacao do animal");
         }
 
@@ -311,7 +318,7 @@ bool UI::validCommand(std::istringstream& command) {
     // Add food command
     else if (args[0] == "food") {
         std::ostringstream string;
-        std::string type;
+        FoodType type;
         int x, y;
 
         // If the arguments are missing, show the correct way to use the command
@@ -329,26 +336,33 @@ bool UI::validCommand(std::istringstream& command) {
             return true;
         }
 
+        string << "Adicionar animal da especie ";
+
         // Check with food type is [for the message]
         switch (args[1][0]) {
             case 'r':
-                type = "relva";
+                type = FoodType::grass;
+                string << "relva";
                 break;
 
             case 't':
-                type = "cenoura";
+                type = FoodType::carrot;
+                string << "cenoura";
                 break;
 
             case 'p':
-                type = "corpo";
+                type = FoodType::body;
+                string << "corpo";
                 break;
 
             case 'b':
-                type = "bife";
+                type = FoodType::steak;
+                string << "bife";
                 break;
 
             case 'a':
-                type = "alimento-misterio";
+                type = FoodType::mysteryFood;
+                string << "comida misterio";
                 break;
 
             default:
@@ -362,8 +376,8 @@ bool UI::validCommand(std::istringstream& command) {
                 x = (rand() % 30);
                 y = (rand() % 30);
 
-                // x = (rand() % simulator.getReserve().getNumColumn());
-                // y = (rand() % simulator.getReserve().getNumRows());
+                // x = (rand() % simulator.getNumColumn());
+                // y = (rand() % simulator.getNumRows());
                 break;
 
             // Selected location
@@ -381,9 +395,9 @@ bool UI::validCommand(std::istringstream& command) {
         }
 
         // Write the event and add the food
-        string << "Adicionar comida do tipo " << type << " nas coordenadas " << x << " " << y << endl;
+        string << " nas coordenadas " << x << " " << y << endl;
         writeMessage((*winInfo), string.str());
-        if (!simulator.addEntity(x, y, EntityTypes::food, args[1][0])) {
+        if (!simulator.addEntity(x, y, type)) {
             writeMessage((*winError), "Erro na criacao da comida");
         }
 
@@ -684,7 +698,7 @@ bool UI::validCommand(std::istringstream& command) {
         // Write the event and show all animals in the reserve that are in the view camera
         string << "A mostar a lista de animais na reserva na visao atual" << endl;
         writeMessage((*winInfo), string.str());
-        writeMessage((*winList), simulator.getViewAnimalList());
+        writeMessage((*winList), simulator.getViewAnimalList(coor(offsetY, offsetY), coor(offsetX + WIN_RESERVE_WITDH, offsetY + WIN_RESERVE_HEIGTH)));
 
         return true;
     }
@@ -744,8 +758,7 @@ bool UI::validCommand(std::istringstream& command) {
         }
 
         // Config the file path
-        std::ostringstream fileNamePath;
-        fileNamePath << "../" << args[1];
+        std::ostringstream fileNamePath(args[1]);
 
         // Select the file command to read
         std::string line;
@@ -840,13 +853,14 @@ void UI::slideViewCam() {
         s.resize(200);
         (*winCommand) >> s;
 
+        // TODO: canMoveY and canMoveX dont change
         if (s == "KEY_UP" && canMoveY) {
             if (offsetY > 0) offsetY--;
             continue;
         }
 
         if (s == "KEY_DOWN" && canMoveY) {
-            if (25 + offsetY < simulator.getReserve().getNumColumn()) offsetY++;
+            if (WIN_RESERVE_HEIGTH + offsetY < simulator.getNumColumn()) offsetY++;
             continue;
         }
 
@@ -856,47 +870,10 @@ void UI::slideViewCam() {
         }
 
         if (s == "KEY_RIGHT" && canMoveX) {
-            if (30 + offsetX < simulator.getReserve().getNumRows()) offsetX++;
+            if (WIN_RESERVE_WITDH + offsetX < simulator.getNumRows()) offsetX++;
             continue;
         }
 
         break;
     } while (true);
-
-    /*
-    // Se pode move entre X e Y, mostra uma parte da janela
-    if(m_moveX && m_moveY)
-    {
-        startX = 0 + m_x;
-        startY = 0 + m_y;
-        endX =  + m_y;
-        endY = 25 + m_y;
-    }
-
-        // Se pode move entre X, só é mostrado uma parte no eixo X
-    else if(m_moveX)
-    {
-        startX = 0 + m_x;
-        startY = 0;
-        endX = 30 + m_y;
-        endY = m_NL;
-    }
-
-        // Se pode move entre Y, só é mostrado uma parte no eixo Y
-    else if(m_moveY)
-    {
-        startX = 0;
-        startY = 0 + m_y;
-        endX = m_NC;
-        endY = 25 + m_y;
-    }
-
-        // Se não pode mover, mostra a reserva toda
-    else
-    {
-        startX = 0;
-        startY = 0;
-        endX = m_NC;
-        endY = m_NL;
-    }*/
 }

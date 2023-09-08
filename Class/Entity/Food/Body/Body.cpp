@@ -1,5 +1,3 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #include "Body.h"
+
+Body::Body(int id) : Food(id, 'p', -1, 10, 0, std::vector<std::string>{"carne"}) {}

@@ -1,16 +1,14 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #ifndef KANGAROO_H
 #define KANGAROO_H
 
 #include "Animal.h"
+#include "Reserve.h"
+#include "consts.h"
+#include "utils.h"
 
-class Kangaroo : private Animal {
-public:
-    Kangaroo(int id, int x, int y);
+class Kangaroo : public Animal {
+   public:
+    Kangaroo(const Reserve& reserve, int id);
 };
 
-
-#endif //KANGAROO_H
+#endif  // KANGAROO_H

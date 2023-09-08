@@ -1,16 +1,11 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #ifndef MYSTERYFOOD_H
 #define MYSTERYFOOD_H
 
-#include "../Food.h"
+#include "Food.h"
 
-class MysteryFood : private Food {
-public:
-    MysteryFood();
+class MysteryFood : public Food {
+   public:
+    MysteryFood(int id);
 };
 
-
-#endif //MYSTERYFOOD_H
+#endif  // MYSTERYFOOD_H

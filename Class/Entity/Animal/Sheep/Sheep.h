@@ -1,16 +1,13 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #ifndef SHEEP_H
 #define SHEEP_H
 
 #include "Animal.h"
+#include "consts.h"
+#include "utils.h"
 
-class Sheep : private Animal {
-public:
-    Sheep(int id, int x, int y);
+class Sheep : public Animal {
+   public:
+    Sheep(const Reserve& reserve, int id);
 };
 
-
-#endif //SHEEP_H
+#endif  // SHEEP_H

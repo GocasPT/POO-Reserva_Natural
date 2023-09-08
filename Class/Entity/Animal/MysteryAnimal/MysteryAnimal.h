@@ -1,16 +1,13 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #ifndef MYSTERYANIMAL_H
 #define MYSTERYANIMAL_H
 
 #include "Animal.h"
+#include "consts.h"
+#include "utils.h"
 
-class MysteryAnimal : private Animal {
-public:
-    MysteryAnimal(int id, int x, int y);
+class MysteryAnimal : public Animal {
+   public:
+    MysteryAnimal(const Reserve& reserve, int id);
 };
 
-
-#endif //MYSTERYANIMAL_H
+#endif  // MYSTERYANIMAL_H

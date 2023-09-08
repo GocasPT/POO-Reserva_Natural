@@ -7,7 +7,6 @@ Reserve::Reserve(int numRow, int numColumn) : NR(numRow), NC(numColumn) {
     }
 }
 
-// TODO: duplicate the list
 Reserve::Reserve(const Reserve& other) : NR(other.NR), NC(other.NC) {
     grid.resize(NR);
     for (int y = 0; y < NR; y++) {
@@ -23,30 +22,79 @@ Reserve::Reserve(const Reserve& other) : NR(other.NR), NC(other.NC) {
     }
 }
 
-// TODO: return false when error apper
-bool Reserve::addEntity(int x, int y, EntityTypes type, char species, int id) {
+bool Reserve::addEntity(int x, int y, int id, AnimalSpice spice) {
     std::unique_ptr<Entity> newEntity;
 
-    /* switch (type) {
-        case EntityTypes::animal:
-            // std::make_unique<Anmimal>();
+    switch (spice) {
+        case AnimalSpice::rabbit: {
+            newEntity = std::make_unique<Rabbit>(*this, id);
             break;
+        }
 
-        case EntityTypes::food:
-            // std::make_unique<Food>();
+        case AnimalSpice::sheep: {
+            newEntity = std::make_unique<Sheep>(*this, id);
             break;
-    } */
+        }
 
-    newEntity = std::make_unique<Entity>(id);
+        case AnimalSpice::wolf: {
+            newEntity = std::make_unique<Wolf>(*this, id);
+            break;
+        }
+
+        case AnimalSpice::kangaroo: {
+            newEntity = std::make_unique<Kangaroo>(*this, id);
+            break;
+        }
+
+        case AnimalSpice::mysteryAnimal: {
+            newEntity = std::make_unique<MysteryAnimal>(*this, id);
+            break;
+        }
+    }
+
     grid[y][x].push_back(std::move(newEntity));
-
     return true;
 }
 
+bool Reserve::addEntity(int x, int y, int id, FoodType type) {
+    std::unique_ptr<Entity> newEntity;
+
+    switch (type) {
+        case FoodType::grass: {
+            newEntity = std::make_unique<Grass>(id);
+            break;
+        }
+
+        case FoodType::carrot: {
+            newEntity = std::make_unique<Carrot>(id);
+            break;
+        }
+
+        case FoodType::body: {
+            newEntity = std::make_unique<Body>(id);
+            break;
+        }
+
+        case FoodType::steak: {
+            newEntity = std::make_unique<Steak>(id);
+            break;
+        }
+
+        case FoodType::mysteryFood: {
+            newEntity = std::make_unique<MysteryFood>(id);
+            break;
+        }
+    }
+
+    grid[y][x].push_back(std::move(newEntity));
+    return true;
+}
+
+// TODO: make this methods
 bool Reserve::killAnimal(int x, int y) {}
 bool Reserve::killAnimal(int id) {}
-bool Reserve::feedAnimal(int x, int y, int nutriocionPoint, int toxicPoint) {}
-bool Reserve::feedAnimal(int id, int nutriocionPoint, int toxicPoint) {}
+bool Reserve::feedAnimal(int x, int y, int nutricionPoint, int toxicPoint) {}
+bool Reserve::feedAnimal(int id, int nutricionPoint, int toxicPoint) {}
 bool Reserve::removeFood(int x, int y) {}
 bool Reserve::removeFood(int id) {}
 bool Reserve::deleteEntities(int x, int y) {}
@@ -69,3 +117,8 @@ Board Reserve::getGrid() const {
 
 int Reserve::getNumRows() const { return NR; }
 int Reserve::getNumColumn() const { return NC; }
+
+Entity Reserve::getEntity(int id) {}
+std::vector<Entity> Reserve::getList(coor start, coor end) {
+    if (end == coor(-1, -1)) end = coor(NC, NR);
+}

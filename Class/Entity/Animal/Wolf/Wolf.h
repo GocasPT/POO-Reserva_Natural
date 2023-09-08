@@ -1,16 +1,13 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #ifndef WOLF_H
 #define WOLF_H
 
 #include "Animal.h"
+#include "consts.h"
+#include "utils.h"
 
-class Wolf : private Animal {
-public:
-    Wolf(int id, int x, int y);
+class Wolf : public Animal {
+   public:
+    Wolf(const Reserve& reserve, int id);
 };
 
-
-#endif //WOLF_H
+#endif  // WOLF_H

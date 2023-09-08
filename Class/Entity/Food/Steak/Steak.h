@@ -1,16 +1,11 @@
-//
-// Created by Guilherme Camacho on 21/11/2022.
-//
-
 #ifndef STEAK_H
 #define STEAK_H
 
-#include "../Food.h"
+#include "Food.h"
 
-class Steak : private Food {
-public:
-    Steak();
+class Steak : public Food {
+   public:
+    Steak(int id);
 };
 
-
-#endif //STEAK_H
+#endif  // STEAK_H
